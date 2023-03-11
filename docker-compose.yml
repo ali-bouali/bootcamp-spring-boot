@@ -1,0 +1,16 @@
+services:
+  postgres:
+    container_name: postgres-sql
+    image: postgres
+    environment:
+      POSTGRES_USER: alibou
+      POSTGRES_PASSWORD: alibou
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:1234"
+    restart: unless-stopped
+
+volumes:
+  postgres:

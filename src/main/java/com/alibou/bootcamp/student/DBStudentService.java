@@ -3,36 +3,40 @@ package com.alibou.bootcamp.student;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-@Service("memoryService")
+@Service
 @RequiredArgsConstructor
-public class InMemoryStudentService implements StudentService {
+@Primary
+public class DBStudentService implements StudentService {
 
-  private final InMemoryStudentRepository repository;
+  private final StudentRepository repository;
 
   @Override
   public Student save(Student s) {
-    return repository.saveToMemory(s);
+    return repository.save(s);
   }
 
   @Override
   public Student update(Student s) {
-    return repository.updateInMemory(s);
+    return repository.save(s);
   }
 
   @Override
   public Student findById(Integer id) {
-    return repository.findByIdInMemory(id);
+    return repository.findById(id)
+        .orElse(null)
+        ;
   }
 
   @Override
   public List<Student> findAll() {
-    return repository.findAllInMemory();
+    return repository.findAll();
   }
 
   @Override
   public void delete(Integer id) {
-    repository.deleteFromMemory(id);
+    repository.deleteById(id);
   }
 }
