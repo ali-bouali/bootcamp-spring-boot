@@ -2,6 +2,8 @@ package com.alibou.bootcamp.transaction;
 
 import com.alibou.bootcamp.user.User;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -28,6 +30,7 @@ public class Transaction {
   private BigDecimal amount;
   private String destinationIban;
   private LocalDate transactionDate;
+  @Enumerated(EnumType.STRING)
   private TransactionType type;
   @ManyToOne
   @JoinColumn(name = "user_id")

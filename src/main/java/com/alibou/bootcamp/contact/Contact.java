@@ -1,6 +1,7 @@
 package com.alibou.bootcamp.contact;
 
 import com.alibou.bootcamp.user.User;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -25,6 +26,7 @@ public class Contact {
   private Integer id;
   private String firstname;
   private String lastname;
+  @Column(unique = true)
   private String email;
   private String iban;
   @ManyToOne
