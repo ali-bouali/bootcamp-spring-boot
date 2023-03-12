@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/student_db
+    url: jdbc:postgresql://localhost:5432/bank_db
     username: alibou
     password: alibou
     driver-class-name: org.postgresql.Driver
