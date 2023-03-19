@@ -18,7 +18,7 @@ public class BootcampApplication {
 			AccountService service
 	) {
 		return args -> {
-			service.save(AccountRequest.builder().build());
+			// service.save(AccountRequest.builder().build());
 		};
 	}
 }
