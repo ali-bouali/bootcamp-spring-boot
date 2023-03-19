@@ -7,8 +7,10 @@ import org.springframework.stereotype.Component;
 public class AccountMapper {
 
   public Account toAccount(AccountRequest request) {
+    if (request == null) {
+      return new Account();
+    }
     return Account.builder()
-        .iban(request.getIban())
         .user(
             User.builder()
                 .id(request.getUserId())

@@ -23,7 +23,7 @@ public class AccountService {
     var account = mapper.toAccount(accountRequest);
     var userHasAlreadyAnAccount = repository.existsByUserId(accountRequest.getUserId());
     if (userHasAlreadyAnAccount) {
-      throw new OperationNonPermittedException("The selected user has an account");
+      throw new OperationNonPermittedException("The selected user has already an account");
     }
     account.setIban(generateRandomIban());
     return repository.save(account).getId();
