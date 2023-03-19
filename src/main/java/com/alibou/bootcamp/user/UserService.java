@@ -3,9 +3,12 @@ package com.alibou.bootcamp.user;
 import com.alibou.bootcamp.account.Account;
 import com.alibou.bootcamp.account.AccountRequest;
 import com.alibou.bootcamp.account.AccountService;
+import com.alibou.bootcamp.transaction.TransactionRepository;
+import com.alibou.bootcamp.transaction.TransactionType;
 import com.alibou.bootcamp.validator.ObjectsValidator;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +22,7 @@ public class UserService {
   private final ObjectsValidator<UserRequest> validator;
   private final UserMapper mapper;
   private final AccountService accountService;
+  private final TransactionRepository transactionRepository;
 
   public Integer create(UserRequest request) {
     validator.validate(request);
@@ -69,5 +73,16 @@ public class UserService {
         .orElseThrow(() -> new EntityNotFoundException("No user found with the ID for account invalidation:: " + userId));
     user.setActive(false);
     return repository.save(user).getId();
+  }
+
+  public BigDecimal getAccountBalance(Integer userId) {
+    return transactionRepository.findAccountBalance(userId);
+  }
+
+  public BigDecimal highestTransfer(Integer userId) {
+    return transactionRepository.findHighestAmountByTransactionType(userId, TransactionType.TRANSFERT);
+  }
+  public BigDecimal highestDeposit(Integer userId) {
+    return transactionRepository.findHighestAmountByTransactionType(userId, TransactionType.DEPOSIT);
   }
 }

@@ -1,5 +1,6 @@
 package com.alibou.bootcamp.user;
 
+import java.math.BigDecimal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -53,6 +54,21 @@ public class UserController {
       @PathVariable("user-id") Integer id
   ) {
     return service.invalidateAccount(id);
+  }
+
+  @GetMapping("/transactions/highest/{user-id}")
+  @ResponseStatus(HttpStatus.OK)
+  public BigDecimal getHighestTransfert(
+      @PathVariable("user-id") Integer userId
+  ) {
+    return service.highestTransfer(userId);
+  }
+  @GetMapping("/transactions/lowest/{user-id}")
+  @ResponseStatus(HttpStatus.OK)
+  public BigDecimal getHighestDeposit(
+      @PathVariable("user-id") Integer userId
+  ) {
+    return service.highestDeposit(userId);
   }
 
 }
