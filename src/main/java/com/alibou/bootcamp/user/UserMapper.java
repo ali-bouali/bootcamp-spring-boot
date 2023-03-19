@@ -22,7 +22,7 @@ public class UserMapper {
         .lastname(user.getLastname())
         .email(user.getEmail())
         .active(user.isActive())
-        .iban(user.getAccount().getIban())
+        .iban(user.getAccount() == null ? null : user.getAccount().getIban())
         .build();
   }
 }

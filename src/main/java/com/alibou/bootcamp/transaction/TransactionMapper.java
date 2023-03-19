@@ -1,6 +1,7 @@
 package com.alibou.bootcamp.transaction;
 
 import com.alibou.bootcamp.user.User;
+import java.time.LocalDate;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,6 +12,7 @@ public class TransactionMapper {
         .amount(request.getAmount())
         .destinationIban(request.getDestinationIban())
         .type(request.getType())
+        .transactionDate(LocalDate.now())
         .user(
             User.builder()
                 .id(request.getUserId())
