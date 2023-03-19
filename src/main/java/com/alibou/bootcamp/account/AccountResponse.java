@@ -1,6 +1,5 @@
 package com.alibou.bootcamp.account;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,8 +11,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AccountRequest {
-  @NotNull(message = "User should not be null")
-  private Integer userId;
+public class AccountResponse {
+
+  private Integer id;
+  private String iban;
+  private String userFirstname;
+  private String userLastname;
 
 }

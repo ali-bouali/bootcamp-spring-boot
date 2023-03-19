@@ -16,4 +16,13 @@ public class AccountMapper {
         )
         .build();
   }
+
+  public AccountResponse toResponse(Account account) {
+    return AccountResponse.builder()
+        .id(account.getId())
+        .iban(account.getIban())
+        .userFirstname(account.getUser().getFirstname())
+        .userLastname(account.getUser().getLastname())
+        .build();
+  }
 }
