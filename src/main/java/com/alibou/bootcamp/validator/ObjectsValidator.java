@@ -22,7 +22,7 @@ public class ObjectsValidator<T> {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet());
-      throw new ObjectValidationException(errorMsg, objectToValidate.getClass().getName());
+      throw new ObjectValidationException(errorMsg, objectToValidate.getClass().getSimpleName());
     }
   }
 
