@@ -8,3 +8,11 @@ spring:
     hibernate:
       ddl-auto: create-drop
     database: h2
+
+security:
+  jwt:
+    secret-key: someKey
+
+fake-api:
+  store:
+    url: someHrul
