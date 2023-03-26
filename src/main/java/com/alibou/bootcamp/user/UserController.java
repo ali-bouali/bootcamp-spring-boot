@@ -1,5 +1,8 @@
 package com.alibou.bootcamp.user;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.math.BigDecimal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -17,10 +20,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
+@Tag(name = "Users")
 public class UserController {
 
   private final UserService service;
 
+  @Operation(
+      description = "Saves a user to the database",
+      responses = {
+          @ApiResponse(responseCode = "200", description = "User successfully created"),
+          @ApiResponse(responseCode = "403", description = "Missing or invalid JWT token")
+      }
+  )
   @PostMapping
   public Integer save(
       @RequestBody UserRequest userRequest
@@ -33,6 +44,13 @@ public class UserController {
     return ResponseEntity.ok(service.findAll());
   }
 
+  @Operation(
+      description = "Finds user by ID",
+      responses = {
+          @ApiResponse(responseCode = "200", description = "User successfully created"),
+          @ApiResponse(responseCode = "403", description = "Missing or invalid JWT token")
+      }
+  )
   @GetMapping("/{user-id}")
   public ResponseEntity<UserResponse> findById(
       @PathVariable("user-id") Integer id
