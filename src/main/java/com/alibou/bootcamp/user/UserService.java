@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,10 +24,12 @@ public class UserService {
   private final UserMapper mapper;
   private final AccountService accountService;
   private final TransactionRepository transactionRepository;
+  private final PasswordEncoder encoder;
 
   public Integer create(UserRequest request) {
     validator.validate(request);
     var user = mapper.toUser(request);
+    user.setPassword(encoder.encode(request.getPassword()));
     user.setActive(false);
     return repository.save(user).getId();
   }

@@ -5,6 +5,9 @@ import com.alibou.bootcamp.exception.OperationNonPermittedException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -29,6 +32,33 @@ public class GlobalExceptionHandler {
     return ExceptionResponse
         .builder()
         .errorMsg(exp.getMessage())
+        .build();
+  }
+
+  @ExceptionHandler(UsernameNotFoundException.class)
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  public ExceptionResponse handle(UsernameNotFoundException exp) {
+    return ExceptionResponse
+        .builder()
+        .errorMsg(exp.getMessage())
+        .build();
+  }
+
+  @ExceptionHandler(BadCredentialsException.class)
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  public ExceptionResponse handle(BadCredentialsException exp) {
+    return ExceptionResponse
+        .builder()
+        .errorMsg("Username and / or password is incorrect")
+        .build();
+  }
+
+  @ExceptionHandler(DisabledException.class)
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  public ExceptionResponse handle() {
+    return ExceptionResponse
+        .builder()
+        .errorMsg("The user is disabled. Please contact the admin")
         .build();
   }
   @ExceptionHandler(OperationNonPermittedException.class)

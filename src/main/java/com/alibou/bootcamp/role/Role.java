@@ -5,8 +5,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -29,11 +27,6 @@ public class Role {
   @Column(unique = true)
   private String name;
 
-  @ManyToMany
-  @JoinTable(
-      name = "user_roles",
-      joinColumns = @JoinColumn(name = "role_id"),
-      inverseJoinColumns = @JoinColumn(name = "user_id")
-  )
+  @ManyToMany(mappedBy = "roles")
   private List<User> users;
 }
