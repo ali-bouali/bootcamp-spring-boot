@@ -2,6 +2,8 @@ package com.alibou.bootcamp.contact;
 
 import com.alibou.bootcamp.account.AccountResponse;
 import java.util.List;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/contacts")
 @RequiredArgsConstructor
+@Tag(name = "Contacts")
 public class ContactController {
 
   private final ContactService service;

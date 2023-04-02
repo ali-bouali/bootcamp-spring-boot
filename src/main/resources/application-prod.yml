@@ -1,12 +1,10 @@
 server:
-  port: 8080
+  port: 5000
 spring:
-  # profiles:
-    # active: @spring.profiles.active@
   datasource:
-    url: jdbc:postgresql://localhost:5432/bank_db
-    username: username
-    password: password
+    url: jdbc:postgresql://bootcampdb.c7kvgzkxxyyo.eu-central-1.rds.amazonaws.com:5432/bootcampdb
+    username: ${ DB_USERNAME }
+    password: ${ DB_PASSWORD }
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -25,5 +23,3 @@ security:
 fake-api:
   store:
     url: https://fakestoreapi.com/products
-springdoc:
-  default-produces-media-type: application/json

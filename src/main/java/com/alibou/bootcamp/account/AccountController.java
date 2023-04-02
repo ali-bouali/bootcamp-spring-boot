@@ -1,6 +1,8 @@
 package com.alibou.bootcamp.account;
 
 import java.util.List;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/accounts")
 @RequiredArgsConstructor
+@Tag(name = "Accounts")
 public class AccountController {
 
   private final AccountService service;
