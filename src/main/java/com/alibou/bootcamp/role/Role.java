@@ -1,6 +1,7 @@
 package com.alibou.bootcamp.role;
 
 import com.alibou.bootcamp.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,5 +29,6 @@ public class Role {
   private String name;
 
   @ManyToMany(mappedBy = "roles")
+  @JsonIgnore
   private List<User> users;
 }
