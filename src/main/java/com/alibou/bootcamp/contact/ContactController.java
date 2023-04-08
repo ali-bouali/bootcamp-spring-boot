@@ -45,10 +45,10 @@ public class ContactController {
     return ResponseEntity.ok(service.findById(id));
   }
 
-  @DeleteMapping("/{account-id}")
+  @DeleteMapping("/{contact-id}")
   @ResponseStatus(HttpStatus.ACCEPTED)
   public void delete(
-      @PathVariable("account-id") Integer id
+      @PathVariable("contact-id") Integer id
   ) {
     service.delete(id);
   }
