@@ -89,4 +89,11 @@ public class UserController {
     return service.highestDeposit(userId);
   }
 
+  @GetMapping("/account/balance/{user-id}")
+  public BigDecimal getAccountBalance(
+          @PathVariable("user-id") Integer userId
+  ) {
+    return service.getAccountBalance(userId);
+  }
+
 }
