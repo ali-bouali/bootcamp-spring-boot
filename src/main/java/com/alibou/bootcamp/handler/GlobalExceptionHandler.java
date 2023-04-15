@@ -5,6 +5,7 @@ import com.alibou.bootcamp.exception.OperationNonPermittedException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -50,6 +51,15 @@ public class GlobalExceptionHandler {
     return ExceptionResponse
         .builder()
         .errorMsg("Username and / or password is incorrect")
+        .build();
+  }
+
+  @ExceptionHandler(AccessDeniedException.class)
+  @ResponseStatus(HttpStatus.FORBIDDEN)
+  public ExceptionResponse handle(AccessDeniedException exp) {
+    return ExceptionResponse
+        .builder()
+        .errorMsg("Access denied")
         .build();
   }
 
