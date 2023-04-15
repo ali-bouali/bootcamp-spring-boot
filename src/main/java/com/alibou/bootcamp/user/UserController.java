@@ -8,6 +8,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,6 +60,7 @@ public class UserController {
   }
 
   @PatchMapping("/validate/{user-id}")
+  @PreAuthorize("hasRole('ADMIN')")
   @ResponseStatus(HttpStatus.ACCEPTED)
   public Integer validate(
       @PathVariable("user-id") Integer id
@@ -67,6 +69,7 @@ public class UserController {
   }
 
   @PatchMapping("/invalidate/{user-id}")
+  @PreAuthorize("hasRole('ADMIN')")
   @ResponseStatus(HttpStatus.ACCEPTED)
   public Integer invalidate(
       @PathVariable("user-id") Integer id

@@ -88,4 +88,11 @@ public class UserService {
   public BigDecimal highestDeposit(Integer userId) {
     return transactionRepository.findHighestAmountByTransactionType(userId, TransactionType.DEPOSIT);
   }
+
+  public List<UserResponse> findAllUsersByState(boolean active) {
+    return repository.findAllByActive(active)
+            .stream()
+            .map(mapper::toResponse)
+            .collect(Collectors.toList());
+  }
 }
