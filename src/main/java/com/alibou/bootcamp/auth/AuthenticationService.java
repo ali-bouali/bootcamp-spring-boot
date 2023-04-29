@@ -59,6 +59,7 @@ public class AuthenticationService {
         roleRepository.save(userRole);
         var claims = new HashMap<String, Object>();
         claims.put("role", user.getRoles());
+        claims.put("active", user.isActive());
         var jwtToken = jwtService.generateToken(savedUser, claims);
 
         return AuthenticationResponse.builder()
@@ -79,6 +80,7 @@ public class AuthenticationService {
                 .orElseThrow();
         var claims = new HashMap<String, Object>();
         claims.put("role", user.getRoles());
+        claims.put("active", user.isActive());
         var jwtToken = jwtService.generateToken(user, claims);
 
         return AuthenticationResponse.builder()

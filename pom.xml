@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.alibou</groupId>
 	<artifactId>bootcamp</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>Bootcamp</name>
 	<description>Bootcamp - Spring boot - Angular - Git - GitLab - Docker</description>
 	<properties>

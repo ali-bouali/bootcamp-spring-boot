@@ -1,10 +1,10 @@
 server:
-  port: 8080
+  port: 8087
 spring:
-  profiles:
-    active: docker
+  # profiles:
+    # active: @spring.profiles.active@
   datasource:
-    url: jdbc:postgresql://localhost:5432/bank_db
+    url: jdbc:postgresql://postgres-sql:5432/bank_db
     username: username
     password: password
     driver-class-name: org.postgresql.Driver

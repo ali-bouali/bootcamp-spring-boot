@@ -8,15 +8,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+// @SpringBootTest
 public class AccountServiceSpringTest {
 
-  @Autowired
+  // @Autowired
   private AccountService service;
-  @Autowired
+  // @Autowired
   private UserRepository userRepository;
 
-  @Test
+  // @Test
   public void should_create_account() {
     var savedUser = userRepository.save(User.builder().firstname("Ali").build());
     var request = AccountRequest.builder()

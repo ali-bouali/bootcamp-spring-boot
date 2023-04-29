@@ -3,14 +3,28 @@ services:
     container_name: postgres-sql
     image: postgres
     environment:
-      POSTGRES_USER: alibou
-      POSTGRES_PASSWORD: alibou
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres
     ports:
-      - "5432:1234"
+      - "5432:5432"
+    networks:
+      - spring-demo
     restart: unless-stopped
+
+  myApp:
+    container_name: spring-boot
+    image: spring/bootcamp
+    ports:
+      - "8080:8087"
+    networks:
+      - spring-demo
+
+networks:
+  spring-demo:
+    driver: bridge
 
 volumes:
   postgres:
