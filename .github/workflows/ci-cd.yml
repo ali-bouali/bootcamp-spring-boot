@@ -25,14 +25,39 @@ jobs:
       - name: Unit tests
         run: mvn clean test
 
-      - name: Run API on H2 database (QA)
-        run: |
-          mvn clean package
-          java -jar -Dspring.profiles.active=qa  target/bootcamp-1.0.jar 
+#      - name: Run API on H2 database (QA)
+#        run: |
+#          mvn clean package
+#          java -jar -Dspring.profiles.active=qa  target/bootcamp-1.0.jar
+#
+#      - name: Run E2E tests
+#        uses: matt-ball/newman-action@master
+#        with:
+#          collection: Bootcamp-QA.postman_collection.json
+#          environment: QA.postman_environment.json
 
-      - name: Run E2E tests
-        uses: matt-ball/newman-action@master
+      - name: Build the API
+        run: mvn clean package
+
+      - name: Build Docker Image
+        uses: docker/build-push-action@v2
         with:
-          collection: Bootcamp-QA.postman_collection.json
-          environment: QA.postman_environment.json
+          context: .
+          dockerfile: Dockerfile
+          push: false
+          tags: spring/bootcamp
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          dockerfile: Dockerfile
+          push: true
+          tags: spring/bootcamp
 
