@@ -62,7 +62,7 @@ class AccountServiceTest {
 
     verify(repository).save(account);
 
-    assertEquals(10, id);
+    assertEquals(1000, id);
   }
 
   @Test
