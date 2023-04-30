@@ -5,7 +5,8 @@ services:
     environment:
       POSTGRES_USER: username
       POSTGRES_PASSWORD: password
-      PGDATA: /data/postgres
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_DB: bank_db
     volumes:
       - postgres:/data/postgres
     ports:
@@ -21,6 +22,8 @@ services:
       - "8080:8087"
     networks:
       - spring-demo
+    depends_on:
+      - postgres
 
 networks:
   spring-demo:
@@ -28,3 +31,4 @@ networks:
 
 volumes:
   postgres:
+    driver: local
