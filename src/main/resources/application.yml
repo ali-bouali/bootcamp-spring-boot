@@ -1,8 +1,8 @@
 server:
   port: 8080
 spring:
-  profiles:
-    active: docker
+#  profiles:
+#    active: docker
   datasource:
     url: jdbc:postgresql://localhost:5432/bank_db
     username: username

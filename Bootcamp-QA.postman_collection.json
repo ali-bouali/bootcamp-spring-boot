@@ -1,18 +1,18 @@
 {
 	"info": {
-		"_postman_id": "6ef32b38-8179-46c5-80f8-f4cffc066750",
+		"_postman_id": "d1c1d725-2ed4-4c95-8c31-8888aa75b905",
 		"name": "Bootcamp-QA",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Create user account",
+			"name": "Authenticate Admin",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200 -> User is created\", function () {",
+							"pm.test(\"Status code is 200 -> User is Authenticated\", function () {",
 							"    pm.response.to.have.status(200);",
 							"    const responseJson = pm.response.json();",
 							"    pm.environment.set(\"bearer_token\", responseJson.token);",
@@ -28,7 +28,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"lastname\": \"{{$randomLastName}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"password\": \"password\"\n}",
+					"raw": "{\n    \"email\": \"admin@alibou.com\",\n    \"password\": \"password\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -36,7 +36,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{basePath}}/api/v1/auth/register",
+					"raw": "{{basePath}}/api/v1/auth/authenticate",
 					"host": [
 						"{{basePath}}"
 					],
@@ -44,7 +44,7 @@
 						"api",
 						"v1",
 						"auth",
-						"register"
+						"authenticate"
 					]
 				}
 			},

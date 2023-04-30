@@ -41,7 +41,7 @@ class AccountServiceTest {
 
     var account = Account.builder()
         .id(10)
-        .user(User.builder().id(1).build())
+        .user(User.builder().id(1).active(false).build())
         .build();
 
     when(repository.existsByUserId(request.getUserId()))
