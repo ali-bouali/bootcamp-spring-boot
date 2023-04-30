@@ -25,16 +25,17 @@ jobs:
       - name: Unit tests
         run: mvn clean test
 
-#      - name: Run API on H2 database (QA)
-#        run: |
-#          mvn clean package
-#          java -jar -Dspring.profiles.active=qa  target/bootcamp-1.0.jar
-#
-#      - name: Run E2E tests
-#        uses: matt-ball/newman-action@master
-#        with:
-#          collection: Bootcamp-QA.postman_collection.json
-#          environment: QA.postman_environment.json
+      - name: Run API on H2 database (QA)
+        run: |
+          mvn clean package
+          java -jar -Dspring.profiles.active=qa  target/bootcamp-1.0.jar & APP_PID=$!
+          sleep 30
+
+      - name: Run E2E tests
+        uses: matt-ball/newman-action@master
+        with:
+          collection: Bootcamp-QA.postman_collection.json
+          environment: QA.postman_environment.json
 
       - name: Build the API
         run: mvn clean package
