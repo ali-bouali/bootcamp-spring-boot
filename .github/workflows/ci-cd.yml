@@ -37,6 +37,9 @@ jobs:
           collection: Bootcamp-QA.postman_collection.json
           environment: QA.postman_environment.json
 
+      - name: Stop API
+        run: kill $APP_PID
+
       - name: Build the API
         run: mvn clean package
 
