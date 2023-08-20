@@ -6,4 +6,4 @@ COPY target/bootcamp-1.0.jar /app/bootcamp.jar
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "-Dspring.profiles.active=docker", "-Drds.url=${DB_URL}", "bootcamp.jar"]
+CMD ["java", "-jar", "-Dspring.profiles.active=docker", "-Dspring.datasource.url=${DB_URL}", "bootcamp.jar"]
