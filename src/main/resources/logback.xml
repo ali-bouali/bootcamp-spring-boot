@@ -1,0 +1,91 @@
+<configuration scan="true" scanPeriod="1 seconds">
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="application" class="net.logstash.logback.appender.LogstashTcpSocketAppender" >
+        <destination>localhost:5300</destination>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <!-- provides the timestamp -->
+                <timestamp>
+                    <fieldName>timestamp</fieldName>
+                    <timeZone>UTC</timeZone>
+                </timestamp>
+                <version>
+                    <version>1.7</version>
+                    <fieldName>version</fieldName>
+                </version>
+                <stackTrace>
+                    <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
+                        <maxDepthPerThrowable>30</maxDepthPerThrowable>
+                        <maxLength>2048</maxLength>
+                        <shortenedClassNameLength>20</shortenedClassNameLength>
+                        <rootCauseFirst>true</rootCauseFirst>
+                        <!-- generated class names -->
+                        <exclude>\$\$FastClassByCGLIB\$\$</exclude>
+                        <exclude>\$\$EnhancerBySpringCGLIB\$\$</exclude>
+                        <exclude>^sun\.reflect\..*\.invoke</exclude>
+                        <!-- JDK internals -->
+                        <exclude>^com\.sun\.</exclude>
+                        <exclude>^sun\.net\.</exclude>
+                        <!-- dynamic invocation -->
+                        <exclude>^net\.sf\.cglib\.proxy\.MethodProxy\.invoke</exclude>
+                        <exclude>^org\.springframework\.cglib\.</exclude>
+                        <exclude>^org\.springframework\.transaction\.</exclude>
+                        <exclude>^org\.springframework\.validation\.</exclude>
+                        <exclude>^org\.springframework\.app\.</exclude>
+                        <exclude>^org\.springframework\.aop\.</exclude>
+                        <exclude>^org\.springframework\.security\.</exclude>
+                        <exclude>^java\.lang\.reflect\.Method\.invoke</exclude>
+                        <!-- Spring plumbing -->
+                        <exclude>^org\.springframework\.ws\..*\.invoke</exclude>
+                        <exclude>^org\.springframework\.ws\.transport\.</exclude>
+                        <exclude>^org\.springframework\.ws\.client\.core\.WebServiceTemplate\.</exclude>
+                        <exclude>^java\.util\.concurrent\.ThreadPoolExecutor\.runWorker</exclude>
+                        <exclude>^java\.lang\.Thread\.run$</exclude>
+                        <exclude>^com\.nr\.instrumentation\.reactor\.</exclude>
+                        <exclude>^reactor\.core\.</exclude>
+                        <exclude>^reactor\.netty\.</exclude>
+                        <exclude>^io\.netty\.</exclude>
+                        <exclude>^de\.porsche\.mymessaging\.custcomm\.messagehandler\.MdcContextLifter</exclude>
+                    </throwableConverter>
+                </stackTrace>
+                <!-- provides the fields in the configured pattern -->
+                <pattern>
+                    <!-- the pattern that defines what to include -->
+                    <omitEmptyFields>true</omitEmptyFields>
+                    <pattern>
+                        <!--                        which keys are available without putting our own? see here: https://logback.qos.ch/manual/layouts.html#conversionWord-->
+                        {
+                        "X-TRACE-ID": "%X{X_TRACE_ID}",
+                        "language": "%X{message_locale}",
+                        "logLevel": "%level",
+                        <!--                        see https://logback.qos.ch/manual/layouts.html#conversionWord -->
+                        "logger": "%logger{10}",
+                        "thread": "%thread",
+                        "class": "%class",
+                        "remoteHost": "%X{req.remoteHost}",
+                        "userAgent": "%X{req.userAgent}",
+                        "requestURI": "%X{req.requestURI}",
+                        "queryString": "%X{req.queryString}",
+                        "requestURL": "%X{req.requestURL}",
+                        "method": "%X{req.method}",
+                        "message": "%message"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="application"/>
+        <appender-ref ref="console"/>
+    </root>
+    <logger name="com.alibou.bootcamp" level="info" additivity="false">
+        <appender-ref ref="application"/>
+    </logger>
+</configuration>
