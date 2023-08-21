@@ -67,5 +67,5 @@ jobs:
           context: .
           dockerfile: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/spring:${{ steps.date.outputs.date }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/bank_api:${{ steps.date.outputs.date }}
 
