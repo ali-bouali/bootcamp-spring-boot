@@ -43,13 +43,17 @@ jobs:
       - name: Build the API
         run: mvn clean package
 
-      - name: Build Docker Image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          dockerfile: Dockerfile
-          push: false
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/spring:bootcamp
+      - name: Get the date
+        id: date
+        run: echo "::set-output name=date::$(date +'%-m%d%H%M')"
+
+#      - name: Build Docker Image
+#        uses: docker/build-push-action@v2
+#        with:
+#          context: .
+#          dockerfile: Dockerfile
+#          push: false
+#          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/spring:bootcamp
 
       - name: Login to Docker Hub
         uses: docker/login-action@v1
@@ -63,5 +67,5 @@ jobs:
           context: .
           dockerfile: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/spring:bootcamp
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/spring:${{ steps.date.outputs.date }}
 
