@@ -47,9 +47,9 @@ jobs:
       - name: Build the API
         run: mvn clean package
 
-      - name: Get the date
-        id: date
-        run: echo "::set-output name=date::$(date +'%-m%d%H%M')"
+#      - name: Get the date
+#        id: date
+#        run: echo "::set-output name=date::$(date +'%-m%d%H%M')"
 
 #      - name: Build Docker Image
 #        uses: docker/build-push-action@v2
