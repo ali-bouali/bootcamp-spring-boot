@@ -7,7 +7,7 @@ on:
 
 jobs:
   ci-cd:
-    name: Build and Deploy Spring boot API
+    name: Build & Deploy Spring boot API
     runs-on: ubuntu-latest
     steps:
       - uses: listendev/action@v0.10
