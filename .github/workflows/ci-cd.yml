@@ -10,10 +10,6 @@ jobs:
     name: Build and Deploy Spring boot API
     runs-on: ubuntu-latest
     steps:
-      - uses: listendev/action@v0.10
-        with:
-          jwt: ${{ secrets.LSTN_API_KEY }}
-          ci: only
       - name: Checkout code
         uses: actions/checkout@v3
 
